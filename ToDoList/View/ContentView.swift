@@ -9,16 +9,19 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @State var item: [String] = ["My first todo item.", "My second todo item.", "The third one."]
+    @State var item: [ItemModel] = [ItemModel(title: "Todo item 1", isCompleted: false),
+                                    ItemModel(title: "Todo item 2", isCompleted: true),
+                                    ItemModel(title: "Todo item 3", isCompleted: false)
+    ]
     
     var body: some View {
         List {
-            ForEach(item, id: \.self) {
-                item in ListRowView(title: item)
+            ForEach(item) { item in
+                ListRowView(item: item)
             }
             .listStyle(PlainListStyle())
                 .navigationTitle("Todo List 📝")
-                .navigationBarItems(leading: EditButton(), trailing: NavigationLink("Add", destination: Text("Destination"))
+                .navigationBarItems(leading: EditButton(), trailing: NavigationLink("Add", destination: AddView())
                                     
             )
         }

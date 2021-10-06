@@ -19,12 +19,25 @@ struct ContentView: View {
             ForEach(item) { item in
                 ListRowView(item: item)
             }
+            
+            .onDelete(perform: deleteItems)
+            .onMove(perform: moveItem)
+            
+        }
+        
             .listStyle(PlainListStyle())
                 .navigationTitle("Todo List 📝")
                 .navigationBarItems(leading: EditButton(), trailing: NavigationLink("Add", destination: AddView())
                                     
             )
         }
+    
+    func deleteItems(indexSet: IndexSet) {
+        item.remove(atOffsets: indexSet)
+    }
+    
+    func moveItem(from: IndexSet, to: Int) {
+        item.move(fromOffsets: from, toOffset: to)
     }
 }
 

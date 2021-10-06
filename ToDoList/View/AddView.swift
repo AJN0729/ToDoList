@@ -8,9 +8,12 @@
 import SwiftUI
 
 struct AddView: View {
+    
+    @State var textFieldText: String = ""
+    
     var body: some View {
         ScrollView {
-            Text("Scrolling")
+            TextField("Type somehting here...", text: $textFieldText)
         }
         .navigationTitle("Add an Item 🖋")
     }

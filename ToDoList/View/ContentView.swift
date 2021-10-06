@@ -8,21 +8,19 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State var item: [String] = ["My first todo item.", "My second todo item.", "The third one."]
+    
     var body: some View {
         List {
-            ListRowView()
+            ForEach(item, id: \.self) {
+                item in ListRowView(title: item)
+            }
+            .listStyle(PlainListStyle())
                 .navigationTitle("Todo List 📝")
-        }
-    }
-}
-
-
-struct ListRowView: View {
-    var body: some View {
-        HStack {
-            Image(systemName: "checkmark.circle")
-            Text("Hello, world!")
-            Spacer()
+                .navigationBarItems(leading: EditButton(), trailing: NavigationLink("Add", destination: Text("Destination"))
+                                    
+            )
         }
     }
 }
